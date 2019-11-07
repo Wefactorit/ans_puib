@@ -257,4 +257,4 @@ template_google: #This is the object
 
 ## Acknowlegement
 ----------------------------------
-I would like to thank [M.Pincemail Sebastien](https://github.com/sype), DevOps Architect, for helping me to get this project done.
+I would like to thank [Mr Pincemail Sebastien](https://github.com/sype), DevOps Architect, for helping me to get this project done.
