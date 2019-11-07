@@ -118,7 +118,7 @@ After choosing the value of **mytemplate** you can enter your **credentials** an
 This is an example of building an **Azure centos** image, please run these commands as **root**:
 ```bash
 git clone https://github.com/Wefactorit/ANS_puib.git
-cd puib
+cd ans_puib
 ansible-playbook deploy_image_builder.yaml --extra-vars "mytemplate=azure-centos"
 ```
 
