@@ -4,7 +4,7 @@
 # provisioners varibales
 provisioners_type_shell: shell
 provisioners_type_ansible: ansible-local
-provisioners_playbook: /root/puib/deploy_installation.yaml
+provisioners_playbook: deploy_installation.yaml
 provisioners_extravars: '-e  env=dev'
 
 
@@ -120,22 +120,22 @@ template_google:
 template_amazon:
   - vm_type_name: amazon-centos
     image_type: amazon-ebs
-    access_key: "access_key"
-    secret_key: "secret_key"
+    access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     ami_name: puib
-    instance_type: t2.micro
+    instance_type: t2.small
     region: eu-west-3
     virtualization_type: hvm
-    image_name: centos/images/*centos-7*
+    image_name: '*-centos-7*'
     root_device_type: ebs
-    owners: "owners_ID"
+    owners: 'account_id'
     aws_ssh_username: centos
     most_recent: true
 
   - vm_type_name: amazon-ubuntu
     image_type: amazon-ebs
-    access_key: "access_key"
-    secret_key: "secret_key"
+    access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
+    secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
     ami_name: puib
     instance_type: t2.micro
     region: eu-west-3

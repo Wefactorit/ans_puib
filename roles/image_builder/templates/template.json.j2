@@ -116,9 +116,6 @@
 
   {% if 'centos' in mytemplate -%}
 
-      {% if 'google' not in mytemplate  %}
-              "rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm",
-      {% endif %}
     {% for item in command_rehl %}
         {{ item }}
     {% endfor %}
