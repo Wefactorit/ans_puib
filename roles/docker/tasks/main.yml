@@ -1,40 +1,39 @@
 ---
 
 #Ubuntu
-  - name: Install prerequisites
-    apt: name={{item}} update_cache=yes
-    with_items:
-     - apt-transport-https
-     - ca-certificates
-     - curl
-     - software-properties-common
-    when: ansible_distribution == "Ubuntu"
+- name: Install docker on Debian OS Family
+  block:
+    - name: Install prerequisites
+      apt: name={{item}} update_cache=yes
+      with_items:
+       - apt-transport-https
+       - ca-certificates
+       - curl
+       - software-properties-common
 
-  - name: Add Docker GPG key
-    apt_key: url= "{{ docker_gpgkey }}"
-    when: ansible_distribution == "Ubuntu"
+    - name: Add Docker GPG key
+      apt_key: url= "{{ docker_gpgkey }}"
 
-  - name: Add Docker APT repository
-    apt_repository:
-      repo: "{{ docker_repo }}"
-    when: ansible_distribution == "Ubuntu"
+    - name: Add Docker APT repository
+      apt_repository:
+        repo: "{{ docker_repo }}"
 
-  - name: Install Docker
-    apt: name= "{{ docker_package_name }}"
-    when: ansible_distribution == "Ubuntu"
+    - name: Install Docker
+      apt: name= "{{ docker_package_name }}"
+
+  when: ansible_os_family == "Debian"
 
 
 #CentOS
-  - name: Add Docker repo
-    get_url:
-      url: "{{ docker_repo_url }}"
-      dest: "{{ docker_repo_path }}"
-    become: yes
-    when: ansible_distribution == "CentOS"
+- name: Install docker on Redhat OS Family
+  block:
+    - name: Add Docker repo
+      get_url:
+        url: "{{ docker_repo_url }}"
+        dest: "{{ docker_repo_path }}"
 
-  - name: Install Docker
-    package:
-      name: "{{ docker_package_name }}"
-      state: latest
-    become: yes
-    when: ansible_distribution == "CentOS"
+    - name: Install Docker
+      package:
+        name: "{{ docker_package_name }}"
+        state: latest
+  when: ansible_os_family == "Redhat"
