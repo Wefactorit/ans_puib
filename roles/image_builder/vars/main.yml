@@ -43,7 +43,7 @@ template_azure:
     subscription_id: subscription_id
     tenant_id: tenant_id
     resource_group: myResourceGroup-rg
-    packer_image_name: packer-image-centos
+    packer_image_name: golden_image_centos_{{ansible_date_time.date}}
     vm_size: Standard_D2_V2
     azure_location: northeurope
     azure_tag_dept: Engineering
@@ -66,7 +66,7 @@ template_azure:
     subscription_id: subscription_id
     tenant_id: tenant_id
     resource_group: myResourceGroup-rg
-    packer_image_name: packer-image-ubuntu
+    packer_image_name: golden_image_ubuntu_{{ansible_date_time.date}}
     vm_size: Standard_D2_V2
     azure_location: northeurope
     azure_tag_dept: Engineering
@@ -95,7 +95,7 @@ template_google:
     zone: europe-west1-b
     gcp_region: europe-west
     gcp_image_description: custom machine image
-    gcp_name_image: img-packer
+    gcp_name_image: golden_image_centos_{{ansible_date_time.date}}
     disk_size: 10
     state_timeout: 20m
 
@@ -110,7 +110,7 @@ template_google:
     zone: europe-west1-b
     gcp_region: europe-west1
     gcp_image_description: custom machine image
-    gcp_name_image: img-packer
+    gcp_name_image: golden_image_ubuntu_{{ansible_date_time.date}}
     disk_size: 10
     state_timeout: 20m
 
@@ -122,13 +122,13 @@ template_amazon:
     image_type: amazon-ebs
     access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
-    ami_name: puib
+    ami_name: golden_image_centos_{{ansible_date_time.date}}
     instance_type: t2.small
     region: eu-west-3
     virtualization_type: hvm
     image_name: '*-centos-7*'
     root_device_type: ebs
-    owners: 'account_id'
+    owners: 258751437250
     aws_ssh_username: centos
     most_recent: true
 
@@ -136,13 +136,13 @@ template_amazon:
     image_type: amazon-ebs
     access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
     secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
-    ami_name: puib
+    ami_name: golden_image_ubuntu_{{ansible_date_time.date}}
     instance_type: t2.micro
     region: eu-west-3
     virtualization_type: hvm
     image_name: ubuntu/images/*ubuntu-xenial-16.04-amd64-server-*
     root_device_type: ebs
-    owners: "owners_ID"
+    owners: 258751437250
     aws_ssh_username: ubuntu
     most_recent: true
     #another type of VM to add
